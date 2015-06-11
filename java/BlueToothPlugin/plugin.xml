@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-plugin-mpos" version="0.1.0">
+	<name>Mpos</name>
+	
+	<engines>
+		<engine name="cordova" version=">=3.4.0"/>
+	</engines>
+
+	<asset src="www/mpos.js" target="js/mpos.js"/>
+	<js-module src="www/mpos.js" name="mpos">
+		<clobbers target="Mpos" />
+	</js-module>
+
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="Mpos">
+				<param name="android-package" value="com.juxintong.cordova.mpos.MposBridge"/>
+			</feature>
+		</config-file>
+		<!--
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+    		<uses-permission android:name="android.permission.BLUETOOTH" />
+    		<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+		</config-file>
+		-->
+		<source-file src="src/android/com/juxintong/cordova/mpos/MposBridge.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposService.aidl" target-dir="src/com/chinaums/mpos/service"/>
+		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposResultListener.aidl" target-dir="src/com/chinaums/mpos/service"/>
+	</platform>
+
+</plugin>
