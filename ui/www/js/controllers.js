@@ -71,7 +71,11 @@ angular.module('starter.controllers', [])
 	
 	$scope.testPlugin = function(event) {
 		console.log('Trying to integrate the custom plugin.');
-		Mpos.setupDevice($scope.car.Model,function(msg) {
+		var clientdata = {
+			billsMID: '898000156911002',
+			billsTID:  '00019130'
+		};
+		Mpos.setupDevice(clientdata,function(msg) {
 			alert(msg);
 		}, function() {
 			alert('error');

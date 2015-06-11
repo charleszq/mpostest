@@ -9,6 +9,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Service;
 import android.content.ComponentName;
@@ -48,14 +49,21 @@ public class MposBridge extends CordovaPlugin {
 	public boolean execute(String action, JSONArray data, final CallbackContext cb)
 			throws JSONException {
 		if ("setupDevice".equals(action)) {
-			Log.i(TAG, "Action is greet.");
-			Log.i(TAG, data.toString());
+			Log.i(TAG, "Action is setupDevice.");
+			JSONObject obj = data.getJSONObject(0);
+			String billsMID = obj.getString("billsMID");
+			String billsTID = obj.getString("billsTID");
+			Log.i(TAG, billsMID + "," + billsTID );
+			
+			if( mUmsMposService == null ) {
+				initService();
+			}
 			
 			//mpos test
 			if( mUmsMposService != null ) {
 				Bundle bundle = new Bundle();
-				bundle.putString("billsMID", "898000156911002");
-				bundle.putString("billsTID", "00019130");
+				bundle.putString("billsMID", billsMID);
+				bundle.putString("billsTID", billsTID);
 				try {
 					mUmsMposService.setDevice(bundle, new IUmsMposResultListener.Stub() {
 
@@ -72,7 +80,7 @@ public class MposBridge extends CordovaPlugin {
 					Log.e(TAG, e.getMessage());
 				}
 			} else {
-				Log.e(TAG, "mpos service null.");
+				Log.e(TAG, "mpos service still is null.");
 			}
 			
 			
@@ -85,7 +93,11 @@ public class MposBridge extends CordovaPlugin {
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
-
+		Log.i(TAG, "In initialize.");
+		initService();		
+	}
+	
+	private void initService() {
 		Context context = cordova.getActivity();
 		Intent intent = new Intent();
 		SharedPreferences mSharedPreferences = context.getSharedPreferences(
