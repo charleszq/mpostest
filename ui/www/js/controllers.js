@@ -10,5 +10,19 @@ angular.module('starter.controllers', [])
 			}, function() {
 				alert('error');
 			});
+
+		},
+		
+		$scope.getDeviceId = function() {
+			var clientdata = {
+				billsMID: '898000156911002',
+				billsTID:  '00019130'
+			};
+			Mpos.getDeviceId(clientdata,function(msg) {
+				alert(msg);
+			}, function() {
+				alert('error');
+			});
 		}
+
 	});

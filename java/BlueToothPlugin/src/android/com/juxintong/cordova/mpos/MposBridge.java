@@ -48,6 +48,10 @@ public class MposBridge extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray data, final CallbackContext cb)
 			throws JSONException {
+		if( mUmsMposService == null ) {
+				initService();
+		}
+		
 		if ("setupDevice".equals(action)) {
 			Log.i(TAG, "Action is setupDevice.");
 			JSONObject obj = data.getJSONObject(0);
@@ -55,11 +59,6 @@ public class MposBridge extends CordovaPlugin {
 			String billsTID = obj.getString("billsTID");
 			Log.i(TAG, billsMID + "," + billsTID );
 			
-			if( mUmsMposService == null ) {
-				initService();
-			}
-			
-			//mpos test
 			if( mUmsMposService != null ) {
 				Bundle bundle = new Bundle();
 				bundle.putString("billsMID", billsMID);
@@ -79,8 +78,34 @@ public class MposBridge extends CordovaPlugin {
 				} catch (RemoteException e) {
 					Log.e(TAG, e.getMessage());
 				}
-			} else {
-				Log.e(TAG, "mpos service still is null.");
+			}
+			
+			
+			return true;
+		} else if( "getDeviceId".equals(action) ){
+			JSONObject obj = data.getJSONObject(0);
+			String billsMID = obj.getString("billsMID");
+			String billsTID = obj.getString("billsTID");
+			if( mUmsMposService != null ) {
+				Bundle bundle = new Bundle();
+				bundle.putString("billsMID", billsMID);
+				bundle.putString("billsTID", billsTID);
+				try {
+					mUmsMposService.setDevice(bundle, new IUmsMposResultListener.Stub() {
+
+						@Override
+						public void umsServiceResult(Bundle result)
+								throws RemoteException {
+							String resultStatus = result.getString("resultStatus");
+							String resultInfo = result.getString("resultInfo");
+							String deviceId = result.getString("deviceId");
+							cb.success( deviceId );
+						}
+						
+					});
+				} catch (RemoteException e) {
+					Log.e(TAG, e.getMessage());
+				}
 			}
 			
 			
