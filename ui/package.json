@@ -23,5 +23,7 @@
     "cordova-plugin-network-information",
     "cordova-plugin-mpos"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "android"
+  ]
 }
