@@ -26,7 +26,7 @@ import com.chinaums.mpos.service.IUmsMposResultListener;
 import com.chinaums.mpos.service.IUmsMposService;
 
 /**
- * @author Qiang Zhang
+ * @author Charles Zhang
  * 
  */
 public class MposBridge extends CordovaPlugin {
@@ -52,65 +52,102 @@ public class MposBridge extends CordovaPlugin {
 				initService();
 		}
 		
-		if ("setupDevice".equals(action)) {
-			Log.i(TAG, "Action is setupDevice.");
-			JSONObject obj = data.getJSONObject(0);
-			String billsMID = obj.getString("billsMID");
-			String billsTID = obj.getString("billsTID");
-			Log.i(TAG, billsMID + "," + billsTID );
-			
-			if( mUmsMposService != null ) {
-				Bundle bundle = new Bundle();
-				bundle.putString("billsMID", billsMID);
-				bundle.putString("billsTID", billsTID);
-				try {
-					mUmsMposService.setDevice(bundle, new IUmsMposResultListener.Stub() {
-
-						@Override
-						public void umsServiceResult(Bundle result)
-								throws RemoteException {
-							String resultStatus = result.getString("resultStatus");
-							String resultInfo = result.getString("resultInfo");
-							cb.success( resultStatus + "," + resultInfo);
-						}
-						
-					});
-				} catch (RemoteException e) {
-					Log.e(TAG, e.getMessage());
-				}
-			}
-			
-			
-			return true;
-		} else if( "getDeviceId".equals(action) ){
-			JSONObject obj = data.getJSONObject(0);
-			String billsMID = obj.getString("billsMID");
-			String billsTID = obj.getString("billsTID");
-			if( mUmsMposService != null ) {
-				Bundle bundle = new Bundle();
-				bundle.putString("billsMID", billsMID);
-				bundle.putString("billsTID", billsTID);
-				try {
-					mUmsMposService.setDevice(bundle, new IUmsMposResultListener.Stub() {
-
-						@Override
-						public void umsServiceResult(Bundle result)
-								throws RemoteException {
-							String resultStatus = result.getString("resultStatus");
-							String resultInfo = result.getString("resultInfo");
-							String deviceId = result.getString("deviceId");
-							cb.success( deviceId );
-						}
-						
-					});
-				} catch (RemoteException e) {
-					Log.e(TAG, e.getMessage());
-				}
-			}
-			
-			
-			return true;
+		if (MposConstants.ACTION_SETUP_DEVICE.equals(action)) {
+			return setupDevice( data, cb );
+		} else if( MposConstants.ACTION_GET_DEVICE_ID.equals(action) ){
+			return getDeviceId( data, cb );
 		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Gets the device id.
+	 * @param data
+	 * @param cb
+	 * @return
+	 * @throws JSONException
+	 */
+	private boolean getDeviceId( JSONArray data, final CallbackContext cb) throws JSONException {
+		JSONObject obj = data.getJSONObject(0);
+		Log.d( TAG, "get device id: " + obj.toString() );
+		
+		Bundle bundle = new Bundle();
+		bundle.putString(MposConstants.BILLS_MID, obj.getString(MposConstants.BILLS_MID));
+		bundle.putString(MposConstants.BILLS_TID, obj.getString(MposConstants.BILLS_TID));
+		
+		if( mUmsMposService != null ) {
+			try {
+				mUmsMposService.setDevice(bundle, new IUmsMposResultListener.Stub() {
+
+					@Override
+					public void umsServiceResult(Bundle result)
+							throws RemoteException {
+						try {
+							JSONObject jsonResult = new JSONObject();
+							jsonResult.put( MposConstants.RESULT_STATUS, result.getString(MposConstants.RESULT_STATUS));
+							jsonResult.put( MposConstants.RESULT_INFO, result.getString(MposConstants.RESULT_INFO));
+							jsonResult.put( MposConstants.RESULT_DEVICE_ID, result.getString(MposConstants.RESULT_DEVICE_ID));
+							Log.e(TAG,  jsonResult.toString() );
+							cb.success( jsonResult.toString() );
+						} catch (JSONException e) {
+							Log.e(TAG, e.getMessage());
+						}
+					}
+					
+				});
+				return true;
+			} catch (RemoteException e) {
+				Log.e(TAG, e.getMessage());
+				cb.error(e.getMessage());
+				return false;
+			}
+		} else {
+			Log.d(TAG, "service is not initialized.");
+			return false;
+		}
+	}
+	
+	/**
+	 * Sets up device.
+	 * @param data
+	 * @param cb
+	 * @return
+	 * @throws JSONException
+	 */
+	private boolean setupDevice( JSONArray data, final CallbackContext cb) throws JSONException {
+		JSONObject obj = data.getJSONObject(0);
+		Log.i(TAG, "setupdevice" + obj.toString() );
+		
+		Bundle bundle = new Bundle();
+		bundle.putString(MposConstants.BILLS_MID, obj.getString(MposConstants.BILLS_MID));
+		bundle.putString(MposConstants.BILLS_TID, obj.getString(MposConstants.BILLS_TID));
+		if( mUmsMposService != null ) {
+			try {
+				mUmsMposService.setDevice(bundle, new IUmsMposResultListener.Stub() {
+
+					@Override
+					public void umsServiceResult(Bundle result)
+							throws RemoteException {
+						JSONObject jsonResult = new JSONObject();
+						try {
+							jsonResult.put(MposConstants.RESULT_STATUS, result.getString(MposConstants.RESULT_STATUS));
+							jsonResult.put(MposConstants.RESULT_INFO, result.getString(MposConstants.RESULT_INFO));
+							Log.d(TAG, jsonResult.toString());
+							cb.success( jsonResult.toString() );
+						} catch (JSONException e) {
+							cb.error( e.getMessage() );
+						}
+					}
+					
+				});
+				return true;
+			} catch (RemoteException e) {
+				Log.e(TAG, e.getMessage());
+				return false;
+			}
+		} else {
+			Log.d(TAG, "Service is not initialized.");
 			return false;
 		}
 	}
@@ -118,7 +155,7 @@ public class MposBridge extends CordovaPlugin {
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
-		Log.i(TAG, "In initialize.");
+		Log.d(TAG, "In initialize.");
 		initService();		
 	}
 	
@@ -140,6 +177,7 @@ public class MposBridge extends CordovaPlugin {
 
 	@Override
 	public void onDestroy() {
+		Log.d(TAG, "Destroying...");
 		if (mConnection != null)
 			cordova.getActivity().unbindService(mConnection);
 		super.onDestroy();
