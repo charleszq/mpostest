@@ -9,9 +9,6 @@ package com.juxintong.cordova.mpos;
  */
 public final class MposConstants {
 	
-	public static final String BILLS_MID = "billsMID";
-	public static final String BILLS_TID = "billsTID";
-	
 	public static final String RESULT_DEVICE_ID		= "deviceId";
 	public static final String RESULT_PAYSTATE		= "payState"  ;
 	public static final String RESULT_RESULTSTATUS	= "resultStatus"  ;
@@ -49,6 +46,7 @@ public final class MposConstants {
 	
 	public static final String ACTION_SETUP_DEVICE = "setupDevice";
 	public static final String ACTION_GET_DEVICE_ID = "getDeviceId";
+	public static final String ACTION_QUERY_ORDER = "queryOrder";
 
 	private MposConstants() {
 		

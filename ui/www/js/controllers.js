@@ -23,6 +23,19 @@ angular.module('starter.controllers', [])
 			}, function() {
 				alert('error');
 			});
+		},
+		
+		$scope.queryOrderInfo = function() {
+			var clientdata = {
+				billsMID: '898000156911002',
+				billsTID:  '00019130',
+				orderId: '622014040126637643'
+			};
+			Mpos.queryOrder(clientdata,function(msg) {
+				alert(msg);
+			}, function() {
+				alert('error');
+			});
 		}
 
 	});

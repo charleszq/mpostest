@@ -32,8 +32,8 @@ public class GetDeviceIdActionHandler extends AbstractActionHandler {
 		Log.d( TAG, "get device id: " + obj.toString() );
 		
 		Bundle bundle = new Bundle();
-		bundle.putString(MposConstants.BILLS_MID, obj.getString(MposConstants.BILLS_MID));
-		bundle.putString(MposConstants.BILLS_TID, obj.getString(MposConstants.BILLS_TID));
+		bundle.putString(MposConstants.RESULT_BILLSMID, obj.getString(MposConstants.RESULT_BILLSMID));
+		bundle.putString(MposConstants.RESULT_BILLSTID, obj.getString(MposConstants.RESULT_BILLSTID));
 		
 		if( mUmsMposService != null ) {
 			try {

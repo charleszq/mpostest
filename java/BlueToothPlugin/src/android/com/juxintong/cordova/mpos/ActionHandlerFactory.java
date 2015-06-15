@@ -29,6 +29,8 @@ public final class ActionHandlerFactory {
 			handler = new SetupDeviceActionHandler(service);
 		} else if( MposConstants.ACTION_GET_DEVICE_ID.equals(action)) {
 			handler = new GetDeviceIdActionHandler(service);
+		} else if( MposConstants.ACTION_QUERY_ORDER.equals(action)) {
+			handler = new QueryOrderActionHandler(service);
 		}
 		return handler;
 	}
