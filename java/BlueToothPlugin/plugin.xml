@@ -25,6 +25,11 @@
 		-->
 		<source-file src="src/android/com/juxintong/cordova/mpos/MposBridge.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/MposConstants.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/AbstractActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/ActionHandlerFactory.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/GetDeviceIdActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/IActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/SetupDeviceActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposService.aidl" target-dir="src/com/chinaums/mpos/service"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposResultListener.aidl" target-dir="src/com/chinaums/mpos/service"/>
 	</platform>
