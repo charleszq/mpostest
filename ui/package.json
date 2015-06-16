@@ -21,7 +21,8 @@
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
     "cordova-plugin-network-information",
-    "cordova-plugin-mpos"
+    "cordova-plugin-mpos",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [
     "android"

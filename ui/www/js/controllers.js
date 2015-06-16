@@ -36,6 +36,18 @@ angular.module('starter.controllers', [])
 			}, function() {
 				alert('error');
 			});
+		},
+		
+		$scope.getCurrentPosition = function() {
+			var option = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: false };
+			navigator.geolocation.getCurrentPosition(
+				function(position) { //success
+					alert( JSON.stringify(position) );
+				}, function(err) { //error
+					alert('Error: ' + err.toString());
+				},
+				option
+			);
 		}
 
 	});
