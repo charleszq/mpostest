@@ -39,12 +39,13 @@ angular.module('starter.controllers', [])
 		},
 		
 		$scope.getCurrentPosition = function() {
-			var option = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: false };
+			var option = { maximumAge: 3000, timeout: 50000, enableHighAccuracy: false };
 			navigator.geolocation.getCurrentPosition(
 				function(position) { //success
-					alert( JSON.stringify(position) );
+					console.log(position);
+					alert( "Longtitude: " + position.coords.longitude + ", Latitude: " + position.coords.latitude );
 				}, function(err) { //error
-					alert('Error: ' + err.toString());
+					alert(err.message);
 				},
 				option
 			);
