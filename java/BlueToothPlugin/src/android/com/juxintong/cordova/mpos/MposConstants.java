@@ -44,9 +44,24 @@ public final class MposConstants {
 	public static final String RESULT_DEALDATE      = "dealDate"   ;
 	public static final String RESULT_MEMO          = "memo"   ;
 	
+	//place order input
+	public static final String INPUT_AMOUNT 			= "amount";
+	public static final String INPUT_MER_ORDER_DESC		= "merOrderDesc";
+	public static final String INPUT_OPERATOR			= "operator";
+	public static final String INPUT_CONSUMER_PHONE		= "consumerPhone";
+	public static final String INPUT_SALES_SLIP_TYPE	= "salesSlipType";
+	public static final String INPUT_PAY_TYPE			= "payType";
+	
+	//place order output
+	public static final String OUTPUT_PAY_STATUS		= "payStatus";
+	public static final String OUTPUT_PRINT_STATUS 		= "printStatus";
+	public static final String OUTPUT_ISS_BANK_NAME		= "issBankName";
+		
+	//action names
 	public static final String ACTION_SETUP_DEVICE = "setupDevice";
 	public static final String ACTION_GET_DEVICE_ID = "getDeviceId";
 	public static final String ACTION_QUERY_ORDER = "queryOrder";
+	public static final String ACTION_PLACE_ORDER = "placeOrder";
 
 	private MposConstants() {
 		

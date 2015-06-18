@@ -3,7 +3,8 @@ angular.module('starter.controllers', ['ionic'])
 		
 		$scope.showLoading = function() {
 			$ionicLoading.show({
-				template: 'Please wait...'
+				template: 'Please wait...',
+				duration: 10000
 			});
 		},
 		
@@ -21,8 +22,8 @@ angular.module('starter.controllers', ['ionic'])
 			Mpos.setupDevice(clientdata,function(msg) {
 				alert(msg);
 				$scope.hideLoading();
-			}, function() {
-				alert('error');
+			},  function(err) {
+				alert(err.message);
 				$scope.hideLoading();
 			});
 
@@ -37,8 +38,8 @@ angular.module('starter.controllers', ['ionic'])
 			Mpos.getDeviceId(clientdata,function(msg) {
 				alert(msg);
 				$scope.hideLoading();
-			}, function() {
-				alert('error');
+			}, function(err) {
+				alert(err.message);
 				$scope.hideLoading();
 			});
 		},
@@ -53,8 +54,8 @@ angular.module('starter.controllers', ['ionic'])
 			Mpos.queryOrder(clientdata,function(msg) {
 				alert(msg);
 				$scope.hideLoading();
-			}, function() {
-				alert('error');
+			}, function(err) {
+				alert(err.message);
 				$scope.hideLoading();
 			});
 		},
@@ -73,6 +74,24 @@ angular.module('starter.controllers', ['ionic'])
 				},
 				option
 			);
+		},
+		
+		$scope.placeOrder = function() {
+			var clientdata = {
+				billsMID: '898000156911002',
+				billsTID:  '00019130',
+				orderId: '622014040126637643',
+				salesSlipType: '1',
+				payType: 'boxpay'
+			};
+			$scope.showLoading();
+			Mpos.placeOrder(clientdata,function(msg) {
+				alert(msg);
+				$scope.hideLoading();
+			}, function(err) {
+				alert(err.message);
+				$scope.hideLoading();
+			});
 		}
 
 	});

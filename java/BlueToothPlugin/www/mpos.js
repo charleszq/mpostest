@@ -10,4 +10,8 @@ module.exports = {
 	queryOrder: function(name, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "Mpos", "queryOrder", [name]);
     },
+	
+	placeOrder: function(name, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "Mpos", "placeOrder", [name]);
+    }
 };

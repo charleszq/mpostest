@@ -30,6 +30,7 @@
 		<source-file src="src/android/com/juxintong/cordova/mpos/GetDeviceIdActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/IActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/SetupDeviceActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/PlaceOrderActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/QueryOrderActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposService.aidl" target-dir="src/com/chinaums/mpos/service"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposResultListener.aidl" target-dir="src/com/chinaums/mpos/service"/>
