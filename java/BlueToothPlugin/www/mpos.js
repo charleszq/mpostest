@@ -13,5 +13,9 @@ module.exports = {
 	
 	placeOrder: function(name, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "Mpos", "placeOrder", [name]);
+    },
+	
+	txnInfoAndSign: function(name, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "Mpos", "txnInfoAndSign", [name]);
     }
 };

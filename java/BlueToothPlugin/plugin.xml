@@ -17,12 +17,6 @@
 				<param name="android-package" value="com.juxintong.cordova.mpos.MposBridge"/>
 			</feature>
 		</config-file>
-		<!--
-		<config-file target="AndroidManifest.xml" parent="/manifest">
-    		<uses-permission android:name="android.permission.BLUETOOTH" />
-    		<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-		</config-file>
-		-->
 		<source-file src="src/android/com/juxintong/cordova/mpos/MposBridge.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/MposConstants.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/AbstractActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
@@ -31,6 +25,7 @@
 		<source-file src="src/android/com/juxintong/cordova/mpos/IActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/SetupDeviceActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/PlaceOrderActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/TransactionInfoAndSignActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/QueryOrderActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposService.aidl" target-dir="src/com/chinaums/mpos/service"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposResultListener.aidl" target-dir="src/com/chinaums/mpos/service"/>

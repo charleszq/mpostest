@@ -23,7 +23,7 @@ angular.module('starter.controllers', ['ionic'])
 				alert(msg);
 				$scope.hideLoading();
 			},  function(err) {
-				alert(err.message);
+				alert(err);
 				$scope.hideLoading();
 			});
 
@@ -39,7 +39,7 @@ angular.module('starter.controllers', ['ionic'])
 				alert(msg);
 				$scope.hideLoading();
 			}, function(err) {
-				alert(err.message);
+				alert(err);
 				$scope.hideLoading();
 			});
 		},
@@ -55,7 +55,7 @@ angular.module('starter.controllers', ['ionic'])
 				alert(msg);
 				$scope.hideLoading();
 			}, function(err) {
-				alert(err.message);
+				alert(err);
 				$scope.hideLoading();
 			});
 		},
@@ -69,7 +69,7 @@ angular.module('starter.controllers', ['ionic'])
 					alert( "Longtitude: " + position.coords.longitude + ", Latitude: " + position.coords.latitude );
 					$scope.hideLoading();
 				}, function(err) { //error
-					alert(err.message);
+					alert(err);
 					$scope.hideLoading();
 				},
 				option
@@ -89,7 +89,24 @@ angular.module('starter.controllers', ['ionic'])
 				alert(msg);
 				$scope.hideLoading();
 			}, function(err) {
-				alert(err.message);
+				alert(err);
+				$scope.hideLoading();
+			});
+		},
+		
+		$scope.txnInfoAndSign = function() {
+			var clientdata = {
+				billsMID: '898000156911002',
+				billsTID:  '00019130',
+				orderId: '622014040126637643',
+				salesSlipType: '1'
+			};
+			$scope.showLoading();
+			Mpos.txnInfoAndSign(clientdata,function(msg) {
+				alert(msg);
+				$scope.hideLoading();
+			}, function(err) {
+				alert(err);
 				$scope.hideLoading();
 			});
 		}

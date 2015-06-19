@@ -33,6 +33,8 @@ public final class ActionHandlerFactory {
 			handler = new QueryOrderActionHandler(service);
 		} else if( MposConstants.ACTION_PLACE_ORDER.equals(action)) {
 			handler = new PlaceOrderActionHandler(service);
+		} else if( MposConstants.ACTION_TXN_INFO_AND_SIGN.equals(action)) {
+			handler = new TransactionInfoAndSignActionHandler(service);
 		}
 		return handler;
 	}
