@@ -31,22 +31,21 @@ public class PlaceOrderActionHandler extends AbstractActionHandler {
 	@Override
 	public boolean handle(JSONArray data, final CallbackContext cb)
 			throws JSONException {
-		JSONObject obj = data.getJSONObject(0);
-		Log.d( TAG, "place order: " + obj.toString() );
-		
-		Bundle bundle = new Bundle();
-		bundle.putString(MposConstants.INPUT_AMOUNT, obj.getString(MposConstants.INPUT_AMOUNT));
-		bundle.putString(MposConstants.RESULT_MERORDERID, obj.getString(MposConstants.RESULT_MERORDERID));
-		bundle.putString(MposConstants.INPUT_MER_ORDER_DESC, obj.getString(MposConstants.INPUT_MER_ORDER_DESC));
-		bundle.putString(MposConstants.RESULT_BILLSMID, obj.getString(MposConstants.RESULT_BILLSMID));
-		bundle.putString(MposConstants.RESULT_BILLSTID, obj.getString(MposConstants.RESULT_BILLSTID));
-		bundle.putString(MposConstants.INPUT_OPERATOR, obj.getString(MposConstants.INPUT_OPERATOR));
-		bundle.putString(MposConstants.INPUT_CONSUMER_PHONE, obj.getString(MposConstants.INPUT_CONSUMER_PHONE));
-		bundle.putString(MposConstants.INPUT_SALES_SLIP_TYPE, obj.getString(MposConstants.INPUT_SALES_SLIP_TYPE));
-		bundle.putString(MposConstants.INPUT_PAY_TYPE, obj.getString(MposConstants.INPUT_PAY_TYPE));
-		bundle.putString(MposConstants.RESULT_MEMO, obj.getString(MposConstants.RESULT_MEMO));
-		
 		try {
+			JSONObject obj = data.getJSONObject(0);
+			Log.d( TAG, "place order: " + obj.toString() );
+			
+			Bundle bundle = new Bundle();
+			bundle.putString(MposConstants.INPUT_AMOUNT, obj.getString(MposConstants.INPUT_AMOUNT));
+			bundle.putString(MposConstants.RESULT_MERORDERID, obj.getString(MposConstants.RESULT_MERORDERID));
+			bundle.putString(MposConstants.INPUT_MER_ORDER_DESC, obj.getString(MposConstants.INPUT_MER_ORDER_DESC));
+			bundle.putString(MposConstants.RESULT_BILLSMID, obj.getString(MposConstants.RESULT_BILLSMID));
+			bundle.putString(MposConstants.RESULT_BILLSTID, obj.getString(MposConstants.RESULT_BILLSTID));
+			bundle.putString(MposConstants.INPUT_OPERATOR, obj.getString(MposConstants.INPUT_OPERATOR));
+			bundle.putString(MposConstants.INPUT_CONSUMER_PHONE, obj.getString(MposConstants.INPUT_CONSUMER_PHONE));
+			bundle.putString(MposConstants.INPUT_SALES_SLIP_TYPE, obj.getString(MposConstants.INPUT_SALES_SLIP_TYPE));
+			bundle.putString(MposConstants.INPUT_PAY_TYPE, obj.getString(MposConstants.INPUT_PAY_TYPE));
+			bundle.putString(MposConstants.RESULT_MEMO, obj.getString(MposConstants.RESULT_MEMO));
 			mUmsMposService.pay(bundle, new IUmsMposResultListener.Stub() {
 
 				@Override
