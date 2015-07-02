@@ -27,6 +27,7 @@
 		<source-file src="src/android/com/juxintong/cordova/mpos/PlaceOrderActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/TransactionInfoAndSignActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/juxintong/cordova/mpos/QueryOrderActionHandler.java" target-dir="src/com/juxintong/cordova/mpos/"/>
+		<source-file src="src/android/com/juxintong/cordova/mpos/Helper.java" target-dir="src/com/juxintong/cordova/mpos/"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposService.aidl" target-dir="src/com/chinaums/mpos/service"/>
 		<source-file src="src/android/com/chinaums/mpos/service/IUmsMposResultListener.aidl" target-dir="src/com/chinaums/mpos/service"/>
 	</platform>

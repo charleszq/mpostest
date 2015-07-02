@@ -46,9 +46,10 @@ angular.module('starter.controllers', ['ionic'])
 		
 		$scope.queryOrderInfo = function() {
 			var clientdata = {
-				billsMID: '898000156911002',
-				billsTID:  '00019130',
-				orderId: '622014040126637643'
+				billsMID: '898350259988888',
+				billsTID:  '59708888',
+                orderId: '20150627191256000002',
+                merOrderId: '20150627191256000002'
 			};
 			$scope.showLoading();
 			Mpos.queryOrder(clientdata,function(msg) {

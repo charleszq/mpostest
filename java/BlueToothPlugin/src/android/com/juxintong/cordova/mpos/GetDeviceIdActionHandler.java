@@ -17,7 +17,7 @@ import com.chinaums.mpos.service.IUmsMposService;
 
 /**
  * @author Charles
- *
+ * 
  */
 public class GetDeviceIdActionHandler extends AbstractActionHandler {
 
@@ -29,40 +29,26 @@ public class GetDeviceIdActionHandler extends AbstractActionHandler {
 	public boolean handle(JSONArray data, final CallbackContext cb)
 			throws JSONException {
 		JSONObject obj = data.getJSONObject(0);
-		Log.d( TAG, "get device id: " + obj.toString() );
-		
-		Bundle bundle = new Bundle();
-		bundle.putString(MposConstants.RESULT_BILLSMID, obj.getString(MposConstants.RESULT_BILLSMID));
-		bundle.putString(MposConstants.RESULT_BILLSTID, obj.getString(MposConstants.RESULT_BILLSTID));
-		
-		if( mUmsMposService != null ) {
-			try {
-				mUmsMposService.setDevice(bundle, new IUmsMposResultListener.Stub() {
+		Log.d(TAG, "get device id: " + obj.toString());
 
-					@Override
-					public void umsServiceResult(Bundle result)
-							throws RemoteException {
-						try {
-							JSONObject jsonResult = new JSONObject();
-							jsonResult.put( MposConstants.RESULT_RESULTSTATUS, result.getString(MposConstants.RESULT_RESULTSTATUS));
-							jsonResult.put( MposConstants.RESULT_RESULTINFO, result.getString(MposConstants.RESULT_RESULTINFO));
-							jsonResult.put( MposConstants.RESULT_DEVICE_ID, result.getString(MposConstants.RESULT_DEVICE_ID));
-							Log.e(TAG,  jsonResult.toString() );
-							cb.success( jsonResult.toString() );
-						} catch (JSONException e) {
-							Log.e(TAG, e.getMessage());
+		Bundle bundle = Helper.generateBundle(obj);
+
+		try {
+			mUmsMposService.setDevice(bundle,
+					new IUmsMposResultListener.Stub() {
+
+						@Override
+						public void umsServiceResult(Bundle result)
+								throws RemoteException {
+							JSONObject jsonResult = Helper
+									.generateJSONObject(result);
+							cb.success(jsonResult.toString());
 						}
-					}
-					
-				});
-				return true;
-			} catch (RemoteException e) {
-				Log.e(TAG, e.getMessage());
-				cb.error(e.getMessage());
-				return false;
-			}
-		} else {
-			Log.d(TAG, "service is not initialized.");
+					});
+			return true;
+		} catch (RemoteException e) {
+			Log.e(TAG, e.getMessage());
+			cb.error(e.getMessage());
 			return false;
 		}
 	}

@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="D:/android_sdk/platforms/android-22/android.jar"/>
 	<classpathentry kind="lib" path="D:/SMP3_HMC/repository/org/json/com.springsource.org.json/1.0.0/com.springsource.org.json-1.0.0.jar"/>
 	<classpathentry kind="lib" path="D:/git/cordova-android/framework/cordova-4.1.0-dev.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
