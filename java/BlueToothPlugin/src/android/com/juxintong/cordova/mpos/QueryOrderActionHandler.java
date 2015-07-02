@@ -57,7 +57,7 @@ public class QueryOrderActionHandler extends AbstractActionHandler {
 			return true;
 		} catch (RemoteException e) {
 			Log.e(TAG, e.getMessage());
-			cb.error( e.getMessage() );
+			cb.error(e.getMessage());
 			return false;
 		}
 	}
