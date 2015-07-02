@@ -48,7 +48,6 @@ angular.module('starter.controllers', ['ionic'])
 			var clientdata = {
 				billsMID: '898350259988888',
 				billsTID:  '59708888',
-                orderId: '20150627191256000002',
                 merOrderId: '20150627191256000002'
 			};
 			$scope.showLoading();
