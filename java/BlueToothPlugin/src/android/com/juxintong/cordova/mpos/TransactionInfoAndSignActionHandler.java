@@ -45,7 +45,7 @@ public class TransactionInfoAndSignActionHandler extends AbstractActionHandler {
 		Bundle bundle = Helper.generateBundle(obj);
 
 		try {
-			mUmsMposService.setDevice(bundle,
+			mUmsMposService.showTransactionInfoAndSign(bundle,
 					new IUmsMposResultListener.Stub() {
 
 						@Override
