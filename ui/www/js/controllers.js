@@ -79,11 +79,16 @@ angular.module('starter.controllers', ['ionic'])
 		
 		$scope.placeOrder = function() {
 			var clientdata = {
-				billsMID: '898000156911002',
-				billsTID:  '00019130',
-				orderId: '622014040126637643',
+				amount: '1',
+				merOrderId: '20150706101056000003',
+				merOderDesc: 'test by xf',
+				billsMID: '898350259988888',
+				billsTID:  '59708888',
+				operator: '0123',
+				consumerPhone: '13916043073',
 				salesSlipType: '1',
-				payType: 'boxpay'
+				payType: 'epos',
+				memo: 'memo by xf'
 			};
 			$scope.showLoading();
 			Mpos.placeOrder(clientdata,function(msg) {
