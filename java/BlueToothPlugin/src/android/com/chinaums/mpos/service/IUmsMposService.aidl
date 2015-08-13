@@ -19,5 +19,6 @@ oneway interface IUmsMposService {
 	void preAuthFin(in Bundle args, in IUmsMposResultListener listener);
 	void preAuthCancel(in Bundle args, in IUmsMposResultListener listener);
 	void preAuthFinCancel(in Bundle args, in IUmsMposResultListener listener);
+	void checkCurrentEnv(in Bundle args, in IUmsMposResultListener listener);
 }
 
