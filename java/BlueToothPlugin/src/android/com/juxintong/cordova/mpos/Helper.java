@@ -27,7 +27,8 @@ public final class Helper {
 			Log.d(Helper.class.getSimpleName(), "Key: " + key + " value: " + value);
 			Object vObject = processBundleValue(value);
 			if( vObject instanceof Boolean ) {
-				bundle.putBoolean(key, (boolean) vObject);
+				Boolean b = (Boolean) vObject;
+				bundle.putBoolean(key, b.booleanValue());
 			} else {
 				bundle.putString( key, vObject.toString());
 			}
@@ -36,8 +37,8 @@ public final class Helper {
 	}
 	
 	static Object processBundleValue( String value ) {
-		if( "true".equalsIgnoreCase( value )) return true;
-		if( "false".equalsIgnoreCase(value)) return false;
+		if( "true".equalsIgnoreCase( value )) return Boolean.TRUE;
+		if( "false".equalsIgnoreCase(value)) return Boolean.FALSE;
 		return value;
 	}
 	
