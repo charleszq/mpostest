@@ -23,10 +23,22 @@ public final class Helper {
 		Iterator<String> keys = json.keys();
 		while(keys.hasNext()) {
 			String key = keys.next();
-			Log.d(Helper.class.getSimpleName(), "Key: " + key + " value: " + json.optString(key));
-			bundle.putString( key, json.optString(key));
+			String value = json.optString(key);
+			Log.d(Helper.class.getSimpleName(), "Key: " + key + " value: " + value);
+			Object vObject = processBundleValue(value);
+			if( vObject instanceof Boolean ) {
+				bundle.putBoolean(key, (boolean) vObject);
+			} else {
+				bundle.putString( key, vObject.toString());
+			}
 		}
 		return bundle;
+	}
+	
+	static Object processBundleValue( String value ) {
+		if( "true".equalsIgnoreCase( value )) return true;
+		if( "false".equalsIgnoreCase(value)) return false;
+		return value;
 	}
 	
 	static JSONObject generateJSONObject( Bundle bundle ) {
